@@ -8,7 +8,12 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
+    compile(
+            "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.1",
+            "org.springframework.boot:spring-boot-starter-web",
+            "org.projectlombok:lombok:1.16.8",
+
+    )
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
