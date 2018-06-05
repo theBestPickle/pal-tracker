@@ -53,6 +53,7 @@ resources:
     uri: git@github.com:jghiloni/tweet-resource-sample.git
     branch: master
     private_key: {{github-private-key}}
+
 - name: tweet
   type: twitter
   source:
@@ -105,6 +106,7 @@ jobs:
 - name: do-tweet
   plan:
   - get: tweet-source
+  - get: pal-tracker-artifacts
     passed: [deploy-production]
   - put: tweet
     params:
