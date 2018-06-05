@@ -84,6 +84,18 @@ jobs:
   - get: pal-tracker-artifacts
     trigger: true
     passed: [build]
+  - task: migrate database
+    file: pal-tracker/ci/migrateDatabase.yml
+    params:
+      CF_API_URL: {{cf-api-url}}
+      CF_USERNAME: {{cf-username}}
+      CF_PASSWORD: {{cf-password}}
+      CF_ORG: {{cf-org}}
+      CF_SPACE: review
+      MYSQL_IP: {{mysql-ip-review}}
+      DATABASE_NAME: {{review-database-name}}
+      DATABASE_USERNAME: {{review-database-username}}
+      DATABASE_PASSWORD: {{review-database-password}}
   - put: review-deployment
     params:
       manifest: pal-tracker/manifest-review.yml
@@ -96,6 +108,18 @@ jobs:
   - get: pal-tracker
   - get: pal-tracker-artifacts
     passed: [deploy-review]
+  - task: migrate database
+    file: pal-tracker/ci/migrateDatabase.yml
+    params:
+      CF_API_URL: {{cf-api-url}}
+      CF_USERNAME: {{cf-username}}
+      CF_PASSWORD: {{cf-password}}
+      CF_ORG: {{cf-org}}
+      CF_SPACE: production
+      MYSQL_IP: {{mysql-ip-production}}
+      DATABASE_NAME: {{production-database-name}}
+      DATABASE_USERNAME: {{production-database-username}}
+      DATABASE_PASSWORD: {{production-database-password}}
   - put: production-deployment
     params:
       manifest: pal-tracker/manifest-production.yml
@@ -114,5 +138,4 @@ jobs:
       media:
       - tweet-source/logo.png
       status: >
-        This is the first tweet with a picture (build ${BUILD_ID})
-        from my custom @concourse ci resource!
+        Do you even Concourse Bro?
