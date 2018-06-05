@@ -107,6 +107,7 @@ jobs:
   plan:
   - get: tweet-source
   - get: pal-tracker-artifacts
+    trigger: true
     passed: [deploy-production]
   - put: tweet
     params:
@@ -114,4 +115,4 @@ jobs:
       - tweet-source/logo.png
       status: >
         This is the first tweet with a picture (build ${BUILD_ID})
-        from my custom @concourseci resource!
+        from my custom @concourse ci resource!
